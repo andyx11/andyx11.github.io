@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Projets Étudiants UCD</title>
+    
+    <style>
+        h3 {
+            text-align: center;
+        }
+        body {
+            margin: 50px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+        .project {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .project h2 {
+            margin-top: 0;
+        }
+        .project p {
+            margin-bottom: 10px;
+        }
+        .project a {
+            display: block;
+            text-decoration: none;
+            color: #0366d6;
+        }
+        .project a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Projets Étudiants UCD</h1>
+        
+        <div class="project">
+            <h2>Projet 1</h2>
+            <p>Description du premier projet.</p>
+            <a href="lien_vers_projet_1">Voir l'exemple d'animation 3D pour le projet 1</a>
+        </div>
+
+        <div class="project">
+            <h2>Projet 2</h2>
+            <p>Description du deuxième projet.</p>
+            <a href="lien_vers_projet_2">Voir l'exemple d'animation 3D pour le projet 2</a>
+        </div>
+
+        <!-- Ajoutez d'autres projets ici -->
+
+    </div>
+</body>
+</html>
