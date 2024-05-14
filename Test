@@ -3,10 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouvelle Page</title>
+    <title>Mes Projets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .project {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .project h2 {
+            margin-top: 0;
+        }
+        .project p {
+            margin-bottom: 10px;
+        }
+        .project a {
+            display: block;
+            text-decoration: none;
+            color: #0366d6;
+        }
+        .project a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur ma nouvelle page !</h1>
-    <p>Cette page est toute fraîche et prête à être personnalisée.</p>
+    <div class="project">
+        <h2>Projet 1</h2>
+        <p>Description du projet 1.</p>
+        <a href="lien_vers_projet_1">Voir l'exemple d'animation 3D pour le projet 1</a>
+    </div>
+
+    <div class="project">
+        <h2>Projet 2</h2>
+        <p>Description du projet 2.</p>
+        <a href="lien_vers_projet_2">Voir l'exemple d'animation 3D pour le projet 2</a>
+    </div>
+
+    <!-- Ajoutez d'autres projets ici -->
+
 </body>
 </html>
