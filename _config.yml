@@ -2,6 +2,4 @@ theme: jekyll-theme-minimal
 title: Andy's homepage
 description: Bookmark this to keep an eye on my project updates!
 
-pages:
-  - title: Test
-    url: /Test.htlm
+
