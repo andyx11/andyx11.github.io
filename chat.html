@@ -8,49 +8,48 @@
         body {
             margin: 0;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
-        canvas {
-            display: block;
+        #canvas-container {
+            width: 80vw;
+            height: 80vh;
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+    <div id="canvas-container">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script>
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+            const geometry = new THREE.BoxGeometry();
+            const texture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/crate.gif');
+            const material = new THREE.MeshBasicMaterial({ map: texture });
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
 
-        camera.position.z = 5;
+            camera.position.z = 5;
 
-        function animate() {
-            requestAnimationFrame(animate);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-            renderer.render(scene, camera);
-        }
+            function animate() {
+                requestAnimationFrame(animate);
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
 
-        function onMouseMove(event) {
-            const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
-            vector.unproject(camera);
-            const dir = vector.sub(camera.position).normalize();
-            const distance = -camera.position.z / dir.z;
-            const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-            camera.lookAt(pos);
-        }
-
-        window.addEventListener('mousemove', onMouseMove, false);
-
-        animate();
-    </script>
+            animate();
+        </script>
+    </div>
 </body>
 </html>
