@@ -8,6 +8,7 @@
     body {
         margin: 0;
         overflow: hidden;
+        background-color: #f0f0f0; /* Couleur d'arrière-plan grise */
     }
     canvas {
         display: block;
@@ -18,15 +19,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf0f0f0); // Couleur d'arrière-plan grise
+
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
     const geometry = new THREE.CylinderGeometry(0.5, 0.5, 10, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const material = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Couleur noire
     const cylinder = new THREE.Mesh(geometry, material);
     scene.add(cylinder);
+
+    const light = new THREE.AmbientLight(0xffffff, 0.5); // Lumière ambiante blanche
+    scene.add(light);
 
     camera.position.z = 20;
 
