@@ -26,7 +26,6 @@
 <body>
     <div id="canvas-container">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-        <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
         <script>
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -35,20 +34,17 @@
             document.getElementById('canvas-container').appendChild(renderer.domElement);
 
             const geometry = new THREE.BoxGeometry();
-            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Utilisation d'une couleur verte pour le matériau
+            const texture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/crate.gif');
+            const material = new THREE.MeshBasicMaterial({ map: texture });
             const cube = new THREE.Mesh(geometry, material);
             scene.add(cube);
 
             camera.position.z = 5;
 
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.25;
-            controls.enableZoom = true;
-
             function animate() {
                 requestAnimationFrame(animate);
-                controls.update();
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
                 renderer.render(scene, camera);
             }
 
