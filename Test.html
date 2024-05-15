@@ -83,8 +83,26 @@
     <p>Consultez <a href="https://andyx11.github.io">la page principale</a> pour plus de détails.</p>
 
     <div style="text-align: center;">
-        <a href="#" class="button">Télécharger le modèle 3D</a>
+        <a href="#" class="button" id="downloadButton">Télécharger le modèle 3D</a>
     </div>
 </div>
+
+<script>
+    // Fonction pour télécharger le modèle 3D
+    function downloadModel() {
+        // Créez un lien temporaire
+        var link = document.createElement('a');
+        link.href = 'https://andyx11.github.io/pipelinesansfondv.glb';
+        link.download = 'modele_3D.glb'; // Nom du fichier à télécharger
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Associer la fonction de téléchargement au bouton de téléchargement
+    var downloadButton = document.getElementById('downloadButton');
+    downloadButton.addEventListener('click', downloadModel);
+</script>
+
 </body>
 </html>
