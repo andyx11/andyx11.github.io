@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Demo 1: The Basics</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 
+<style>
+    model-viewer {
+        width: 800px;
+        height: 600px;
+     }
+  img {
+    max-width: 960px;
+    max-height: 520px;
+    width:auto;
+    height:auto;
+  }
+  body {
+    margin: 50px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+ .container {
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>Demo 1: Displaying a 3D model in a website</h1>
+
+
+<model-viewer 
+    src="https://andyx11.github.io/poly.glb"
+    camera-controls
+    alt="Etau 3D">
+</model-viewer>
+
+<p><a href = "https://andyx11.github.io">Return to main page</a></p>
+    
+</div>
+</body>
+</html>
