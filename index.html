@@ -1,4 +1,4 @@
-u<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -17,57 +17,80 @@ u<!DOCTYPE html>
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+            font-size: 28px;
+        }
+        .header img {
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
         .project {
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-bottom: 20px;
             padding: 20px;
-            background-color: #fff;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
         .project h2 {
             margin-top: 0;
             color: #007bff;
+            font-size: 24px;
         }
         .project p {
             margin-bottom: 10px;
             color: #555;
         }
         .project a {
-            display: block;
+            display: inline-block;
             text-decoration: none;
             color: #007bff;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.3s ease;
         }
         .project a:hover {
-            text-decoration: underline;
+            border-bottom-color: #007bff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="float: right; margin-left: 20px;">
+        <div class="header">
+            <h1>Mes Projets à l'UCD</h1>
             <img src="7449BAEF-6166-4344-9AF7-959900F75537.png" alt="Votre image" width="70" height="70">
         </div>
-        <h1 style="color: #007bff;">Mes Projets a l'UCD </h1>
         
         <div class="project">
-            <h2> Test Blender Pipeline </h2>
-            <p> Tube realisee sur Blender</p>
-            <a href="Test.html">Voir l'animation 3D </a>
+            <h2>Test Blender Pipeline</h2>
+            <p>Tube réalisé sur Blender.</p>
+            <a href="Test.html">Voir l'animation 3D</a>
         </div>
 
         <div class="project">
-            <h2>Cremaillere 2</h2>
-            <p>Mouvement d une cremaillere.</p>
-            <a href="cremaillere.html"> Voir l'animation 3D </a>
+            <h2>Cremaillere</h2>
+            <p>Mouvement d'une crémaillère.</p>
+            <a href="cremaillere.html">Voir l'animation 3D</a>
         </div>
 
         <div class="project">
-            <h2> Etau </h2>
-            <p>Modele 3D fait sur telephone.</p>
-            <a href="etau.html"> Voir l'animation 3D </a>
+            <h2>Etau</h2>
+            <p>Modèle 3D fait sur téléphone.</p>
+            <a href="etau.html">Voir l'animation 3D</a>
         </div>
         
         <!-- Ajoutez d'autres projets ici -->
@@ -75,3 +98,4 @@ u<!DOCTYPE html>
     </div>
 </body>
 </html>
+
