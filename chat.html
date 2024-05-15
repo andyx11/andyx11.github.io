@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pendulum Simulation in 3D</title>
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background-color: #f0f0f0; /* Couleur d'arrière-plan grise */
-    }
-    canvas {
-        display: block;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation 3D avec déplacement de caméra</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f0f0); // Couleur d'arrière-plan grise
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
 
-    const geometry = new THREE.CylinderGeometry(0.5, 0.5, 10, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Couleur noire
-    const cylinder = new THREE.Mesh(geometry, material);
-    scene.add(cylinder);
+        camera.position.z = 5;
 
-    const light = new THREE.AmbientLight(0xffffff, 0.5); // Lumière ambiante blanche
-    scene.add(light);
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
 
-    camera.position.z = 20;
+        function onMouseMove(event) {
+            const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
+            vector.unproject(camera);
+            const dir = vector.sub(camera.position).normalize();
+            const distance = -camera.position.z / dir.z;
+            const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+            camera.lookAt(pos);
+        }
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        window.addEventListener('mousemove', onMouseMove, false);
 
-    function animate() {
-        requestAnimationFrame(animate);
-        cylinder.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-    animate();
-</script>
+        animate();
+    </script>
 </body>
 </html>
