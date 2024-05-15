@@ -20,28 +20,49 @@
     margin: 50px;
     padding: 20px;
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
   }
  .container {
     max-width: 800px;
-    margin-bottom: 20px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    color: #007bff;
+    margin-top: 0;
+    font-size: 28px;
+  }
+  p {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 </style>
 </head>
 
 <body>
 <div class="container">
-<h1>Demo 1: Displaying a 3D model in a website</h1>
+<h1>Demo 1: Afficher un modèle 3D sur un site Web</h1>
 
 
 <model-viewer 
     src="https://andyx11.github.io/pipelinesansfondv.glb"
     camera-controls
-    alt="A 3D model of the Blender Pipeline">
+    alt="Un modèle 3D du pipeline Blender">
 </model-viewer>
 
-<p><a href = "https://andyx11.github.io">Return to main page</a></p>
+<p><a href="https://andyx11.github.io">Retour à la page principale</a></p>
     
 </div>
 </body>
 </html>
-
