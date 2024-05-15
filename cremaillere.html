@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Demo 3: Rigid Body Animation</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+<style>
+    model-viewer {
+        width: 600px;
+        height: 600px;
+     }
+  body {
+    margin: 50px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+ .container {
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+  .button {
+    background-color: #4CAFFF;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color: #FFAF50;
+  color: white;
+}
+</style>
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>Demo 3:Rigid Body Constraints</h1>
+
+<model-viewer 
+    id="rigid-animation-demo"
+    src="https://andyx11.github.io/cremaillere.glb"
+    autoplay 
+    camera-controls
+    alt="A simple four cylinder engine"
+    background-color="#ffffff">
+   <button class="button" id="play-pause">Pause</button></div>
+</model-viewer>
+
+<p><a href = "https://andyx11.github.io">Return to main page</a></p>
+</div>
+
+<script type="module">
+const modelViewer = document.querySelector("#rigid-animation-demo");
+const playPauseButton = document.querySelector("#play-pause");
+
+modelViewer.interactionPrompt = 'none';
+
+playPauseButton.addEventListener("click", () => {
+  if (modelViewer.paused) {
+    modelViewer.play();
+    playPauseButton.textContent = "Pause";
+  } else {
+    modelViewer.pause();
+    playPauseButton.textContent = "Play";
+  }
+});
+
+modelViewer.pause();
+</script>
+
+</body>
+</html>
