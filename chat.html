@@ -1,40 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Simulation Physique 3D</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendulum Simulation</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    #pendulum {
+        width: 2px;
+        height: 200px;
+        background-color: #000;
+        position: relative;
+    }
+    #bob {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #333;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
 </head>
 <body>
-<div id="canvas-container"></div>
+<div id="pendulum">
+    <div id="bob"></div>
+</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-    // Création de la scène, de la caméra et du rendu
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('canvas-container').appendChild(renderer.domElement);
+    const pendulum = document.getElementById('pendulum');
+    const bob = document.getElementById('bob');
 
-    // Création d'un cube rouge
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    let angle = Math.PI / 4; // Starting angle (45 degrees)
+    const length = 200; // Length of the pendulum arm in pixels
+    const gravity = 9.81; // Gravity in m/s^2
+    const timeStep = 0.05; // Time step in seconds
+    const dampingFactor = 0.99; // Damping factor to simulate air resistance
 
-    // Positionnement de la caméra
-    camera.position.z = 5;
+    let angularVelocity = 0;
 
-    // Fonction d'animation
-    function animate() {
-        requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        renderer.render(scene, camera);
+    function updatePendulum() {
+        const acceleration = (-1 * gravity / length) * Math.sin(angle); // Calculate acceleration
+        angularVelocity += acceleration * timeStep; // Update angular velocity
+        angularVelocity *= dampingFactor; // Apply damping
+
+        angle += angularVelocity * timeStep; // Update angle
+
+        const x = length * Math.sin(angle); // Calculate horizontal position of bob
+        const y = length * Math.cos(angle); // Calculate vertical position of bob
+
+        bob.style.left = `${pendulum.offsetWidth / 2 + x}px`; // Set horizontal position
+        bob.style.bottom = `${y}px`; // Set vertical position
+
+        requestAnimationFrame(updatePendulum); // Continue simulation
     }
 
-    // Appel de la fonction d'animation
-    animate();
+    updatePendulum(); // Start the simulation
 </script>
 </body>
 </html>
