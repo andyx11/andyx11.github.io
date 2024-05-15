@@ -1,71 +1,47 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Projets</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .project {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #fff;
-        }
-        .project h2 {
-            margin-top: 0;
-            color: #007bff;
-        }
-        .project p {
-            margin-bottom: 10px;
-            color: #555;
-        }
-        .project a {
-            display: block;
-            text-decoration: none;
-            color: #007bff;
-        }
-        .project a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <title>Demo 1: The Basics</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+<style>
+    model-viewer {
+        width: 800px;
+        height: 600px;
+     }
+  img {
+    max-width: 960px;
+    max-height: 520px;
+    width:auto;
+    height:auto;
+  }
+  body {
+    margin: 50px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+ .container {
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div style="float: right; margin-left: 20px;">
-            <img src="7449BAEF-6166-4344-9AF7-959900F75537.png" alt="Votre image" width="100" height="100">
-        </div>
-        <h1 style="color: #007bff;">Mes Projets</h1>
-        
-        <div class="project">
-            <h2>Projet 1</h2>
-            <p>Description du projet 1.</p>
-            <a href="lien_vers_projet_1">Voir l'exemple d'animation 3D pour le projet 1</a>
-        </div>
+<div class="container">
+<h1>Demo 1: Displaying a 3D model in a website</h1>
 
-        <div class="project">
-            <h2>Projet 2</h2>
-            <p>Description du projet 2.</p>
-            <a href="lien_vers_projet_2">Voir l'exemple d'animation 3D pour le projet 2</a>
-        </div>
 
-        <!-- Ajoutez d'autres projets ici -->
+<model-viewer 
+    src="https://andyx11.github.io/pipelinesansfondv.glb"
+    camera-controls
+    alt="A 3D model of the Blender Pipeline">
+</model-viewer>
 
-    </div>
+<p><a href = "https://andyx11.github.io">Return to main page</a></p>
+    
+</div>
 </body>
 </html>
+
