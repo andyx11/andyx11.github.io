@@ -2,45 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Demo 1: The Basics</title>
+    <title>Demo 1: Afficher un modèle 3D sur un site Web</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 
-<style>
-    model-viewer {
-        width: 800px;
-        height: 600px;
-     }
-  img {
-    max-width: 960px;
-    max-height: 520px;
-    width:auto;
-    height:auto;
-  }
-  body {
-    margin: 50px;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
- .container {
-    max-width: 800px;
-    margin-bottom: 20px;
-  }
-</style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 32px;
+            text-align: center;
+        }
+        .model-viewer-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        model-viewer {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
 <div class="container">
-<h1>Demo 1: Displaying a 3D model in a website</h1>
+    <h1>Demo 1: Afficher un modèle 3D sur un site Web</h1>
 
+    <div class="model-viewer-container">
+        <model-viewer 
+            src="https://andyx11.github.io/pipelinesansfondv.glb"
+            camera-controls
+            alt="Un modèle 3D du pipeline Blender">
+        </model-viewer>
+    </div>
 
-<model-viewer 
-    src="https://andyx11.github.io/poly.glb"
-    camera-controls
-    alt="Etau 3D">
-</model-viewer>
+    <p>Ceci est une démonstration simple pour afficher un modèle 3D sur une page web en utilisant <a href="https://modelviewer.dev/">Model Viewer</a>.</p>
+    <p>Consultez <a href="https://andyx11.github.io">la page principale</a> pour plus de détails.</p>
 
-<p><a href = "https://andyx11.github.io">Return to main page</a></p>
-    
+    <div style="text-align: center;">
+        <a href="#" class="button" id="downloadButton">Télécharger le modèle 3D</a>
+    </div>
 </div>
+
+<script>
+    // Fonction pour télécharger le modèle 3D
+    function downloadModel() {
+        // Créez un lien temporaire
+        var link = document.createElement('a');
+        link.href = 'https://andyx11.github.io/pipelinesansfondv.glb';
+        link.download = 'modele_3D.glb'; // Nom du fichier à télécharger
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Associer la fonction de téléchargement au bouton de téléchargement
+    var downloadButton = document.getElementById('downloadButton');
+    downloadButton.addEventListener('click', downloadModel);
+</script>
+
 </body>
 </html>
