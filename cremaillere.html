@@ -5,78 +5,107 @@
     <title>Demo 3: Rigid Body Animation</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 
-<style>
-    model-viewer {
-        width: 600px;
-        height: 600px;
-     }
-
-  body {
-    margin: 50px;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
- .container {
-    max-width: 800px;
-    margin-bottom: 20px;
-  }
-  .button {
-    background-color: #4CAFFF;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-}
-
-.button:hover {
-  background-color: #FFAF50;
-  color: white;
-}
-</style>
-</style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 32px;
+            text-align: center;
+        }
+        model-viewer {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .button {
+            background-color: #4CAFFF;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #FFAF50;
+        }
+    </style>
 </head>
 
 <body>
-<div class="container">
-<h1>Demo 3:Rigid Body Constraints</h1>
+    <div class="container">
+        <h1>Demo 3: Rigid Body Animation</h1>
 
-<model-viewer 
-    id="rigid-animation-demo"
-    src="https://andyx11.github.io/cremaillere.glb"
-    autoplay 
-    camera-controls
-    alt="A simple four cylinder engine"
-    background-color="#ffffff">
-   <button class="button" id="play-pause">Pause</button></div>
-</model-viewer>
+        <model-viewer 
+            id="rigid-animation-demo"
+            src="https://andyx11.github.io/cremaillere.glb"
+            autoplay 
+            camera-controls
+            alt="A simple four cylinder engine"
+            background-color="#ffffff">
+        </model-viewer>
 
-<p><a href = "https://andyx11.github.io">Return to main page</a></p>
-</div>
+        <p><a href="https://andyx11.github.io">Retour à la page principale</a></p>
 
-<script type="module">
-const modelViewer = document.querySelector("#rigid-animation-demo");
-const playPauseButton = document.querySelector("#play-pause");
+        <div style="text-align: center;">
+            <button class="button" id="play-pause">Pause</button>
+        </div>
+    </div>
 
-modelViewer.interactionPrompt = 'none';
+    <script type="module">
+        const modelViewer = document.querySelector("#rigid-animation-demo");
+        const playPauseButton = document.querySelector("#play-pause");
 
-playPauseButton.addEventListener("click", () => {
-  if (modelViewer.paused) {
-    modelViewer.play();
-    playPauseButton.textContent = "Pause";
-  } else {
-    modelViewer.pause();
-    playPauseButton.textContent = "Play";
-  }
-});
+        modelViewer.interactionPrompt = 'none';
 
-modelViewer.pause();
-</script>
+        playPauseButton.addEventListener("click", () => {
+            if (modelViewer.paused) {
+                modelViewer.play();
+                playPauseButton.textContent = "Pause";
+            } else {
+                modelViewer.pause();
+                playPauseButton.textContent = "Play";
+            }
+        });
 
+        modelViewer.pause();
+    </script>
 </body>
 </html>
+
