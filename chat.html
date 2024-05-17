@@ -1,55 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulation 3D avec déplacement de caméra</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        #canvas-container {
-            width: 80vw;
-            height: 80vh;
-            border: 2px solid #333;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation 3D avec déplacement de caméra</title>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+#canvas-container {
+    flex: 1;
+    width: 100%;
+}
+#controls {
+    margin: 10px;
+}
+</style>
 </head>
 <body>
-    <div id="canvas-container">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-        <script>
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer();
-            renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
+<div id="canvas-container"></div>
+<div id="controls">
+    <button id="playPauseButton">Play</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const scene = new THREE.Scene();
 
-            const geometry = new THREE.BoxGeometry();
-            const texture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/crate.gif');
-            const material = new THREE.MeshBasicMaterial({ map: texture });
-            const cube = new THREE.Mesh(geometry, material);
-            scene.add(cube);
+// Charger une texture de ciel
+const loader = new THREE.CubeTextureLoader();
+const texture = loader.setPath('https://threejs.org/examples/textures/cube/Bridge2/').load([
+    'posx.jpg', 'negx.jpg',
+    'posy.jpg', 'negy.jpg',
+    'posz.jpg', 'negz.jpg'
+]);
+scene.background = texture;
 
-            camera.position.z = 5;
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
 
-            function animate() {
-                requestAnimationFrame(animate);
-                cube.rotation.x += 0.01;
-                cube.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
+document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-            animate();
-        </script>
-    </div>
+const gltfLoader = new THREE.GLTFLoader();
+let robot, mixer, action;
+
+gltfLoader.load(
+    'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/models/gltf/RobotExpressive/RobotExpressive.glb',
+    function (gltf) {
+        robot = gltf.scene;
+        scene.add(robot);
+        robot.position.set(0, 0, 0);
+        robot.scale.set(1, 1, 1); // Ajustez l'échelle si nécessaire
+
+        // Ajout de l'éclairage
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(1, 1, 1).normalize();
+        scene.add(directionalLight);
+
+        mixer = new THREE.AnimationMixer(robot);
+        action = mixer.clipAction(gltf.animations[0]);
+    },
+    undefined,
+    function (error) {
+        console.error(error);
+    }
+);
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+controls.enableZoom = true;
+
+let clock = new THREE.Clock();
+let isPlaying = false;
+
+document.getElementById('playPauseButton').addEventListener('click', () => {
+    if (isPlaying) {
+        action.stop();
+        document.getElementById('playPauseButton').textContent = 'Play';
+    } else {
+        action.play();
+        document.getElementById('playPauseButton').textContent = 'Pause';
+    }
+    isPlaying = !isPlaying;
+});
+
+function animate() {
+    requestAnimationFrame(animate);
+    if (mixer) {
+        mixer.update(clock.getDelta());
+    }
+    if (robot) {
+        robot.rotation.y += 0.005; // Rotation automatique pour un effet dynamique
+    }
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+animate();
+</script>
 </body>
 </html>
