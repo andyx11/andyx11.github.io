@@ -9,11 +9,11 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f0f0f0;
+            background-color: #e1f5fe;
             color: #333;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
@@ -29,19 +29,41 @@
         .header h1 {
             color: #007bff;
             margin: 0;
-            font-size: 28px;
+            font-size: 32px;
         }
         .header img {
-            border-radius: 50%;
+            border-radius: 10%;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 20px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        .navbar a:hover {
+            color: #0056b3;
+        }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
         .project {
+            flex: 1 1 calc(33.333% - 20px);
             border: 1px solid #ccc;
             border-radius: 10px;
-            margin-bottom: 20px;
             padding: 20px;
             background-color: #f9f9f9;
             transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -56,49 +78,54 @@
             margin-bottom: 10px;
             color: #555;
         }
-        .project a {
-            display: inline-block;
-            text-decoration: none;
-            color: #007bff;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom-color 0.3s ease;
-        }
-        .project a:hover {
-            border-bottom-color: #007bff;
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
         }
     </style>
+    <script>
+        function goToUCD() {
+            window.location.href = 'https://www.ucd.ie';
+        }
+        function goToFrenchSchool() {
+            window.location.href = 'https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots'; // 
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Mes Projets à l'UCD</h1>
-            <img src="7449BAEF-6166-4344-9AF7-959900F75537.png" alt="Votre image" width="70" height="70">
+            <div>
+                <img src="UCD-Logo.webp" alt="Logo UCD" width="70" height="70" onclick="goToUCD()">
+                <img src="french-school-logo.png" alt="Logo école France" width="70" height="70" onclick="goToFrenchSchool()">
+            </div>
         </div>
-        
-        <div class="project">
-            <h2> Pipeline</h2>
-            <p>Tube réalisé sur Blender.</p>
-            <a href="Test.html">Voir l'animation 3D</a>
+        <div class="projects">
+            <div class="project" onclick="location.href='pipeline.html'">
+                <h2>Pipeline</h2>
+                <p>Tube réalisé sur Blender.</p>
+            </div>
+            <div class="project" onclick="location.href='cremaillere.html'">
+                <h2>Crémaillère</h2>
+                <p>Mouvement d'une crémaillère.</p>
+            </div>
+            <div class="project" onclick="location.href='etau.html'">
+                <h2>Étau</h2>
+                <p>Modèle 3D fait sur téléphone.</p>
+            </div>
+            <div class="project" onclick="location.href='chat.html'">
+                <h2>Test</h2>
+                <p>Code ChatGPT.</p>
+            </div>
         </div>
-
-        <div class="project">
-            <h2>Cremaillere</h2>
-            <p>Mouvement d'une crémaillère.</p>
-            <a href="cremaillere.html">Voir l'animation 3D</a>
+        <div id="about" class="about">
+            <h2>À propos de moi</h2>
+            <p>Je suis un étudiant en stage à l'UCD. Passionné par la modélisation 3D et le développement web, voici quelques-uns de mes projets.</p>
         </div>
-
-        <div class="project">
-            <h2>Etau</h2>
-            <p>Modèle 3D fait sur téléphone.</p>
-            <a href="etau.html">Voir l'animation 3D</a>
-        </div>
-        
-           <div class="project">
-            <h2> Test </h2>
-            <p> Code chatgpt.</p>
-            <a href="chat.html">Voir l'animation 3D</a>
+        <div class="footer">
+            &copy; 2024 Mes Projets à l'UCD
         </div>
     </div>
 </body>
 </html>
-
