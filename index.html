@@ -8,23 +8,27 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #e1f5fe;
             color: #333;
         }
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            min-height: calc(10vh - 30px); /* Adjusted to include margins */
         }
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         .header h1 {
             color: #007bff;
@@ -37,23 +41,11 @@
             cursor: pointer;
             margin-left: 10px;
         }
-        .navbar {
-            margin-bottom: 20px;
-        }
-        .navbar a {
-            text-decoration: none;
-            color: #007bff;
-            margin-right: 20px;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-        .navbar a:hover {
-            color: #0056b3;
-        }
         .projects {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            flex-grow: 1; /* Ensure projects take up available space */
         }
         .project {
             flex: 1 1 calc(33.333% - 20px);
@@ -63,7 +55,7 @@
             background-color: #f9f9f9;
             transition: all 0.3s ease;
             text-align: center;
-            cursor: pointer;
+            position: relative;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -77,26 +69,61 @@
         .project p {
             margin-bottom: 10px;
             color: #555;
+            max-height: 60px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .project.expanded p {
+            max-height: none;
+        }
+        .project .see-more {
+            display: none;
+            margin-top: 10px;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .project.show-more .see-more {
+            display: block;
         }
         .footer {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
             color: #777;
         }
     </style>
     <script>
-        function goToUCD() {
+        function goToUCD(event) {
+            event.stopPropagation();
             window.location.href = 'https://www.ucd.ie';
         }
-        function goToFrenchSchool() {
-            window.location.href = 'https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots'; // 
+        function goToFrenchSchool(event) {
+            event.stopPropagation();
+            window.location.href = 'https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots';
+        }
+        function toggleExpand(element) {
+            const project = element.closest('.project');
+            project.classList.toggle('expanded');
+            element.textContent = project.classList.contains('expanded') ? 'Voir moins' : 'Voir plus';
+        }
+        function checkContentLength() {
+            const projects = document.querySelectorAll('.project');
+            projects.forEach(project => {
+                const p = project.querySelector('p');
+                const seeMore = project.querySelector('.see-more');
+                if (p.scrollHeight > p.clientHeight) {
+                    project.classList.add('show-more');
+                }
+            });
+        }
+        window.onload = checkContentLength;
     </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Mes Projets à l'UCD</h1>
-            <div>
+         <div>
                 <img src="logo_ucd.png" alt="Logo UCD" width="70" height="70" onclick="goToUCD()">
                 <img src="logo_mi.png" alt="Logo MI" width="70" height="70" onclick="goToFrenchSchool()">
             </div>
@@ -105,23 +132,27 @@
             <div class="project" onclick="location.href='Blender.html'">
                 <h2> Blender </h2>
                 <p>Utilisation du logiciel Blender pour l'enseignement.</p>
+                <span class="see-more" onclick="event.stopPropagation(); toggleExpand(this)">Voir plus</span>
             </div>
             <div class="project" onclick="location.href='Ariane5.html'">
                 <h2> Coiffe Ariane 5 </h2>
-                <p> En colaboration avec l'entreprise allemande OHB et l'UCD, une reproduction de la coiffe de la fuséee Ariane 5 a été construite pour y effectuer des tests de tracabilités de particules au sein de la coiffe.  .</p>
+                <p>En collaboration avec l'entreprise allemande OHB et l'UCD, une reproduction de la coiffe de la fusée Ariane 5 a été construite pour y effectuer des tests de traçabilité de particules au sein de la coiffe.</p>
+                <span class="see-more" onclick="event.stopPropagation(); toggleExpand(this)">Voir plus</span>
             </div>
             <div class="project" onclick="location.href='etau.html'">
                 <h2>Étau</h2>
                 <p>Modèle 3D fait sur téléphone.</p>
+                <span class="see-more" onclick="event.stopPropagation(); toggleExpand(this)">Voir plus</span>
             </div>
             <div class="project" onclick="location.href='chat.html'">
                 <h2>Test</h2>
                 <p>Code ChatGPT.</p>
+                <span class="see-more" onclick="event.stopPropagation(); toggleExpand(this)">Voir plus</span>
             </div>
         </div>
         <div id="about" class="about">
             <h2>À propos de moi</h2>
-            <p>Je suis un étudiant en stage à l'UCD. Passionné par la modélisation 3D et le développement web, voici quelques-uns de mes projets.</p>
+            <p>Je suis un étudiant en stage à l'UCD, en formation à Polytech Montpellier dans la filière MI. A travers ce site web, je vais vous présenter les projets réalisés pendant mon stage de 4 mois sous la supervision de Kevin Nolan.</p>
         </div>
         <div class="footer">
             &copy; 2024 Mes Projets à l'UCD
@@ -129,3 +160,9 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+   
