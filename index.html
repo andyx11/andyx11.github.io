@@ -93,12 +93,10 @@
         }
     </style>
     <script>
-        function goToUCD(event) {
-            event.stopPropagation();
+       function goToUCD() {
             window.location.href = 'https://www.ucd.ie';
         }
-        function goToFrenchSchool(event) {
-            event.stopPropagation();
+        function goToFrenchSchool() {
             window.location.href = 'https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots';
         }
         function toggleExpand(element) {
@@ -123,9 +121,10 @@
     <div class="container">
         <div class="header">
             <h1>Mes Projets à l'UCD</h1>
-         <div>
+             <div>
                 <img src="logo_ucd.png" alt="Logo UCD" width="70" height="70" onclick="goToUCD()">
-                <img src="logo_mi.png" alt="Logo MI" width="70" height="70" onclick="goToFrenchSchool()">
+                <!-- Ajout d'une classe "overlay" pour désactiver les interactions -->
+                <img src="logo_mi.png" class="overlay" alt="Logo MI" width="70" height="70" onclick="goToFrenchSchool()">
             </div>
         </div>
         <div class="projects">
