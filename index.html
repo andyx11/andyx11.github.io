@@ -11,6 +11,8 @@
             padding: 0;
             background-color: #e1f5fe;
             color: #333;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
         .container {
             width: 90%;
@@ -22,7 +24,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            min-height: calc(10vh - 30px); /* Adjusted to include margins */
+            min-height: calc(10vh - 30px);
         }
         .header {
             display: flex;
@@ -35,17 +37,31 @@
             margin: 0;
             font-size: 32px;
         }
+        .logo-container {
+            position: relative;
+        }
         .header img {
             border-radius: 10%;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             margin-left: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
         }
         .projects {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            flex-grow: 1; /* Ensure projects take up available space */
+            flex-grow: 1;
         }
         .project {
             flex: 1 1 calc(33.333% - 20px);
@@ -56,6 +72,7 @@
             transition: all 0.3s ease;
             text-align: center;
             position: relative;
+            cursor: pointer;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -92,39 +109,14 @@
             color: #777;
         }
     </style>
-    <script>
-       function goToUCD() {
-            window.location.href = 'https://www.ucd.ie';
-        }
-        function goToFrenchSchool() {
-            window.location.href = 'https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots';
-        }
-        function toggleExpand(element) {
-            const project = element.closest('.project');
-            project.classList.toggle('expanded');
-            element.textContent = project.classList.contains('expanded') ? 'Voir moins' : 'Voir plus';
-        }
-        function checkContentLength() {
-            const projects = document.querySelectorAll('.project');
-            projects.forEach(project => {
-                const p = project.querySelector('p');
-                const seeMore = project.querySelector('.see-more');
-                if (p.scrollHeight > p.clientHeight) {
-                    project.classList.add('show-more');
-                }
-            });
-        }
-        window.onload = checkContentLength;
-    </script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Mes Projets à l'UCD</h1>
-             <div>
+            <div class="logo-container">
                 <img src="logo_ucd.png" alt="Logo UCD" width="70" height="70" onclick="goToUCD()">
-                <!-- Ajout d'une classe "overlay" pour désactiver les interactions -->
-                <img src="logo_mi.png" class="overlay" alt="Logo MI" width="70" height="70" onclick="goToFrenchSchool()">
+                <div class="overlay" onclick="goToFrenchSchool()"></div>
             </div>
         </div>
         <div class="projects">
@@ -157,11 +149,22 @@
             &copy; 2024 Mes Projets à l'UCD
         </div>
     </div>
+
+    <script>
+        function goToUCD() {
+            fadeOutAndRedirect('https://www.ucd.ie');
+        }
+
+        function goToFrenchSchool() {
+            fadeOutAndRedirect('https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots');
+        }
+
+        function fadeOutAndRedirect(url) {
+            document.body.style.opacity = 0;
+            setTimeout(function() {
+                window.location.href = url;
+            }, 500);
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
-   
