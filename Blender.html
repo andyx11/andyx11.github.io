@@ -28,7 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 40px;
+            margin-bottom: 10px;
         }
         .header h1 {
             color: #007bff;
@@ -96,10 +96,21 @@
         .header img.overlay {
             pointer-events: none;
         }
+        .blender-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .blender-link:hover {
+            color: darkblue;
+        }
+        .blender-text {
+            font-size: 14px;
+        }
     </style>
     <script>
         function goToUCD() {
-            window.location.href = 'https://www.ucd.ie';
+            window.location.href = 'https://www.blender.org';
         }
         function goToFrenchSchool() {
             window.location.href = 'https://www.polytech.umontpellier.fr/formation/cycle-ingenieur/mecanique-et-interactions/en-quelques-mots';
@@ -132,6 +143,10 @@
                 <img src="logo_mi.png" class="overlay" alt="Logo MI" width="70" height="70" onclick="goToFrenchSchool()">
             </div>
         </div>
+        <p class="blender-text"> <span class="blender-link" onclick="goToUCD()">Blender</span> est un outil visuel puissant pour les enseignants car il offre une représentation graphique réaliste des concepts abstraits. 
+        Grâce à ses capacités de modélisation 3D, d'animation et de rendu, les professeurs peuvent créer des visualisations immersives 
+        qui aident les élèves à comprendre des sujets complexes. Par exemple, en utilisant Blender, un professeur peut illustrer des phénomènes 
+        scientifiques, des processus techniques ou des concepts artistiques de manière visuellement captivante.</p>
         <div class="projects">
             <div class="project" onclick="location.href='Blender.html'">
                 <h2> Pipeline </h2>
@@ -154,7 +169,6 @@
                 <span class="see-more" onclick="event.stopPropagation(); toggleExpand(this)">Voir plus</span>
             </div>
         </div>
-        
         <div class="footer">
             &copy; 2024 Mes Projets à l'UCD
         </div>
